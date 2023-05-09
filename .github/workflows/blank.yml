@@ -1,5 +1,5 @@
 name: CI test
-on: [push]
+on: push
 jobs:
   build-and-test:
     strategy:
@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v3
         with:
           python-version: ${{matrix.python-version}}
         
@@ -18,4 +21,3 @@ jobs:
         
       - name: Run tests
         run: npm test
-        
