@@ -5,7 +5,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
-        python-version: ["3.7", "3.8", "3.9"]
+        python-version: [3.7, 3.8, 3.9]
     runs-on: ${{matrix.os}}
     steps:
       - name: Checkout code
@@ -17,7 +17,10 @@ jobs:
           python-version: ${{matrix.python-version}}
         
       - name: Install Dependencies
-        run: npm install
+        run: | 
+          python3 -m pip install --upgrade pip
+          pip install -r ./requirements.txt
         
       - name: Run tests
-        run: npm test
+        run: python3 test_app.py
+
